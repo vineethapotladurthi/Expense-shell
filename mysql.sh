@@ -1,11 +1,11 @@
 #!/bin/bash
 
 USERID=$(id -u)
-LOGS_FOLDER="/var/log/shell-script"
+LOGS_FOLDER="/var/log/Expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 TIME_STAMP=$(date +%Y-%m-%d-%H-%M-%S)
 LOGFILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
-
+mkdir -p $LOGS_FOLDER
 
 # if [ $USERID -ne 0 ]; then
 #     echo "you have to run the script under root previleges.."
@@ -22,7 +22,7 @@ validate(){
      echo -e "$R $2 failedd.......!" | tee -a &LOGFILE
      exit 1
     else
-        echo -e "$G $2 here you go successfully...."&>>LOGFILE
+        echo -e "$G $2 here you go successfully...." | tee -a &>>LOGFILE
     fi
 }
 Check_Root
@@ -30,10 +30,10 @@ Check_Root
 dnf install mysql-server -y &>>LOGFILE
 validate $? "mysql server.....! installation"
 
-systemctl enable mysqld &>>LOGFILE
+systemctl enable mysqld  | tee -a &>>LOGFILE
 validate $? "enblaing mysqlserver"
 
-systemctl start mysqld &>>LOGFILE
+systemctl start mysqld  &>>LOGFILE
 validate $? "started mysqlserverere..!"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1
