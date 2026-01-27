@@ -1,9 +1,9 @@
 #!/bin/bash
 
 USERID=$(id -u)
-R='\033[0;31m'
-G='\e[32m'
-N='\033[0m'
+R="\033[0;31m"
+G="\e[32m"
+N="\033[0"
 
 LOGS_FOLDER="/var/log/Expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
