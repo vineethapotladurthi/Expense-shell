@@ -18,7 +18,7 @@ Check_Root(){
     fi
 }
 validate(){
-    if($1 -ne 0); then
+    if [ $1 -ne 0 ]; then
      echo -e "$R $2 failedd.......!" | tee -a &LOGFILE
      exit 1
     else
