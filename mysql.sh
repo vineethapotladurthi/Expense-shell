@@ -2,7 +2,7 @@
 
 USERID=$(id -u)
 R='\033[0;31m'
-G='\033[0;32m'   #'\e[32m'
+G='\e[32m'
 N='\033[0m'
 
 LOGS_FOLDER="/var/log/Expense"
