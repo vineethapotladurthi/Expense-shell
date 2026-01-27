@@ -23,10 +23,10 @@ Check_Root(){
 }
 validate(){
     if [ $1 -ne 0 ]; then
-     echo -e "$R $2 failedd.......!" | tee -a $LOGFILE
+     echo -e "${R} $2 failedd.......!" | tee -a $LOGFILE
      exit 1
     else
-        echo -e "$G $2 here you go successfully...." | tee -a &>>$LOGFILE
+        echo -e "${G} $2 here you go successfully...." | tee -a &>>$LOGFILE
     fi
 }
 Check_Root
