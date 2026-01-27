@@ -40,8 +40,14 @@ validate $? "enblaing mysqlserver"
 systemctl start mysqld  &>>$LOGFILE
 validate $? "started mysqlserverere..!"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
-validate $? "seting up root password"
+mysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+if [ $? -ne o ]; then
+    echo "root pswd is not setup"
+    mysql_secure_installation --set-root-pass ExpenseApp@1
+    validate $? "seting up root password"
+    else
+    echo " already settuped.."
+fi
 
 # for package in $@
 # do 
