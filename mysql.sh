@@ -1,15 +1,17 @@
 #!/bin/bash
 
-USERID=$(id -u)
-Red='\033[0;31m'
-Green='\033[0;32m'
-Normal='\033[0m'
+
 
 LOGS_FOLDER="/var/log/Expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 TIME_STAMP=$(date +%Y-%m-%d-%H-%M-%S)
-LOGFILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
-sudo mkdir -p $LOGS_FOLDER
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
+mkdir -p $LOGS_FOLDER
+
+USERID=$(id -u)
+Red='\033[0;31m'
+Green='\033[0;32m'
+Normal='\033[0m'
 
 
 
@@ -28,27 +30,27 @@ Check_Root(){
 validate(){
     if [ $1 -ne 0 ]
     then
-     echo -e "$2 ....${Red}failedd.......!" | tee -a $LOGFILE
+     echo -e "$2 ....${Red}failedd.......!" | tee -a $LOG_FILE
      exit 1
     else
-        echo -e "$2...${Green}.. here you go successfully...." | tee -a $LOGFILE
+        echo -e "$2...${Green}.. here you go successfully...." | tee -a $LOG_FILE
     fi
 }
 Check_Root
 
-dnf install mysql-server -y &>>$LOGFILE
+dnf install mysql-server -y &>>$LOG_FILE
 validate $? "mysql server.....! installation"
 
-systemctl enable mysqld 2>&1 | tee -a $LOGFILE
+systemctl enable mysqld 2>&1 | tee -a $LOG_FILE
 validate $? "enblaing mysqlserver"
 
-systemctl start mysqld  &>>$LOGFILE
+systemctl start mysqld  &>>$LOG_FILE
 validate $? "started mysqlserverere..!"
 
-mysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
+mysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
 if [ $? -ne 0 ]
 then
-    echo "root ${Red} pswd is not setup" &>>$LOGFILE
+    echo "root ${Red} pswd is not setup" &>>$LOG_FILE
     mysql_secure_installation --set-root-pass ExpenseApp@1
     validate $? "seting up root password"
 else
