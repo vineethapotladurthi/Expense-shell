@@ -48,7 +48,7 @@ validate $? "started mysqlserverere..!"
 mysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    echo "root pswd is not setup"
+    echo "root ${R} pswd is not setup" &>>$LOGFILE
     mysql_secure_installation --set-root-pass ExpenseApp@1
     validate $? "seting up root password"
 else
