@@ -1,19 +1,16 @@
 #!/bin/bash
 
 
-
 LOGS_FOLDER="/var/log/Expense"
-SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
+mkdir -p $LOGS_FOLDER
+SCRIPT_NAME=$(basename $0 | cut -d "." -f1)
 TIME_STAMP=$(date +%Y-%m-%d-%H-%M-%S)
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
-mkdir -p $LOGS_FOLDER
 
 USERID=$(id -u)
 Red='\033[0;31m'
 Green='\033[0;32m'
 Normal='\033[0m'
-
-
 
 
 # if [ $USERID -ne 0 ]; then
@@ -23,7 +20,7 @@ Normal='\033[0m'
 Check_Root(){
     if [ $USERID -ne 0 ]
     then
-     echo -e " ${Red} you have to run the script under root previleges.." &>>$LOG_FILE
+     echo -e " ${Red} you have to run the script under root previleges.." | tee -a $LOG_FILE
      exit 1
     fi
 }
