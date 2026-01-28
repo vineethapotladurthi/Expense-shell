@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 
 LOGS_FOLDER="/var/log/Expense"
