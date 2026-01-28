@@ -1,9 +1,6 @@
 #!/bin/bash
 
-USERID=$(id -u)
-R="\033[0;31m"
-G="\e[32m"
-N="\033[0"
+
 
 LOGS_FOLDER="/var/log/Expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
@@ -11,18 +8,26 @@ TIME_STAMP=$(date +%Y-%m-%d-%H-%M-%S)
 LOGFILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
 mkdir -p $LOGS_FOLDER
 
+
+USERID=$(id -u)
+R='\033[0;31m'
+G='\e[32m'
+N='\033[0'
+
 # if [ $USERID -ne 0 ]; then
 #     echo "you have to run the script under root previleges.."
 #     exit 1
 # fi
 Check_Root(){
-    if [ $USERID -ne 0 ]; then
+    if [ $USERID -ne 0 ]
+    then
      echo -e " ${R} you have to run the script under root previleges.." &>>$LOGFILE
      exit 1
     fi
 }
 validate(){
-    if [ $1 -ne 0 ]; then
+    if [ $1 -ne 0 ]
+    then
      echo -e "$2 ....${R}failedd.......!" | tee -a $LOGFILE
      exit 1
     else
@@ -41,12 +46,12 @@ systemctl start mysqld  &>>$LOGFILE
 validate $? "started mysqlserverere..!"
 
 mysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
-if [ $? -ne 0 ];
- then
+if [ $? -ne 0 ]
+then
     echo "root pswd is not setup"
     mysql_secure_installation --set-root-pass ExpenseApp@1
     validate $? "seting up root password"
-    else
+else
     echo " already settuped.."
 fi
 
