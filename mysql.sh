@@ -40,7 +40,8 @@ validate $? "enblaing mysqlserver"
 systemctl start mysqld  &>>$LOG_FILE
 validate $? "started mysqlserverere..!"
 
-mysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOG_FILE
+mysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e "show databases;"
+
 if [ $? -ne 0 ]
 then
     echo "root ${Red} pswd is not setup" &>>$LOG_FILE
