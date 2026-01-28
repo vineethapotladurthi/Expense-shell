@@ -21,17 +21,17 @@ mkdir -p $LOGS_FOLDER
 Check_Root(){
     if [ $USERID -ne 0 ]
     then
-     echo -e " ${R} you have to run the script under root previleges.." &>>$LOGFILE
+     echo -e " ${Red} you have to run the script under root previleges.." &>>$LOGFILE
      exit 1
     fi
 }
 validate(){
     if [ $1 -ne 0 ]
     then
-     echo -e "$2 ....${R}failedd.......!" | tee -a $LOGFILE
+     echo -e "$2 ....${Red}failedd.......!" | tee -a $LOGFILE
      exit 1
     else
-        echo -e "$2...${G}.. here you go successfully...." | tee -a &>>$LOGFILE
+        echo -e "$2...${Green}.. here you go successfully...." | tee -a &>>$LOGFILE
     fi
 }
 Check_Root
@@ -48,11 +48,11 @@ validate $? "started mysqlserverere..!"
 mysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    echo "root ${R} pswd is not setup" &>>$LOGFILE
+    echo "root ${Red} pswd is not setup" &>>$LOGFILE
     mysql_secure_installation --set-root-pass ExpenseApp@1
     validate $? "seting up root password"
 else
-    echo " already settuped.."
+    echo " ${Green}...already settuped.."
 fi
 
 # for package in $@
