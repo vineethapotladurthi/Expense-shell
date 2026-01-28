@@ -23,7 +23,7 @@ Normal='\033[0m'
 Check_Root(){
     if [ $USERID -ne 0 ]
     then
-     echo -e " ${Red} you have to run the script under root previleges.." &>>$LOGFILE
+     echo -e " ${Red} you have to run the script under root previleges.." &>>$LOG_FILE
      exit 1
     fi
 }
