@@ -52,7 +52,7 @@ then
     mysql_secure_installation --set-root-pass ExpenseApp@1
     validate $? "seting up root password"
 else
-    echo " ${Green}...already settuped.."
+    echo "$Green...already settuped.."
 fi
 
 # for package in $@
