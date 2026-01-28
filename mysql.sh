@@ -1,6 +1,9 @@
 #!/bin/bash
 
-
+USERID=$(id -u)
+R='\033[0;31m'
+G='\e[32m'
+N='\033[0'
 
 LOGS_FOLDER="/var/log/Expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
@@ -9,10 +12,7 @@ LOGFILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIME_STAMP.log"
 mkdir -p $LOGS_FOLDER
 
 
-USERID=$(id -u)
-R='\033[0;31m'
-G='\e[32m'
-N='\033[0'
+
 
 # if [ $USERID -ne 0 ]; then
 #     echo "you have to run the script under root previleges.."
