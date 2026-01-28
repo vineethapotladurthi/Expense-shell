@@ -2,7 +2,7 @@
 
 USERID=$(id -u)
 Red='\033[0;31m'
-Green='\e[32m'
+Green='\033[0;32m'
 Normal='\033[0m'
 
 LOGS_FOLDER="/var/log/Expense"
@@ -31,7 +31,7 @@ validate(){
      echo -e "$2 ....${Red}failedd.......!" | tee -a $LOGFILE
      exit 1
     else
-        echo -e "$2...${Green}.. here you go successfully...." | tee -a &>>$LOGFILE
+        echo -e "$2...${Green}.. here you go successfully...." | tee -a $LOGFILE
     fi
 }
 Check_Root
@@ -39,7 +39,7 @@ Check_Root
 dnf install mysql-server -y &>>$LOGFILE
 validate $? "mysql server.....! installation"
 
-systemctl enable mysqld  | tee -a &>>$LOGFILE
+systemctl enable mysqld 2>&1 | tee -a $LOGFILE
 validate $? "enblaing mysqlserver"
 
 systemctl start mysqld  &>>$LOGFILE
@@ -52,7 +52,7 @@ then
     mysql_secure_installation --set-root-pass ExpenseApp@1
     validate $? "seting up root password"
 else
-    echo "$Green...already settuped.."
+    echo -e "${Green}...already settuped.."
 fi
 
 # for package in $@
