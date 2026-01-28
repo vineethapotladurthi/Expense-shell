@@ -2,7 +2,7 @@
 
 USERID=$(id -u)
 Red='\033[0;31m'
-Green='\033[0;32m'   #'\e[32m'
+Green='\e[32m'
 Normal='\033[0m'
 
 LOGS_FOLDER="/var/log/Expense"
