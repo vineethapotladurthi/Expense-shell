@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-LOGS_FOLDER="/var/log/Expense"
+LOGS_FOLDER="/var/sys/log/Expense"
 mkdir -p $LOGS_FOLDER
 SCRIPT_NAME=$(basename $0 | cut -d "." -f1)
 TIME_STAMP=$(date +%Y-%m-%d-%H-%M-%S)
