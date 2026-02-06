@@ -50,3 +50,14 @@ then
 else
     echo -e "${Green}...already settuped.."
 fi
+
+mkdir -p /app
+validate $? "creating app folder"
+
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+validate $? "downloading backend application"
+
+cd /app&>>$LOG_FILE
+unzip /tmp/backend.zip
+validate $? "unzip backend code"
+
