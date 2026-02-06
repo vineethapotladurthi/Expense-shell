@@ -67,7 +67,7 @@ cp /home/ec2-user/Expense-shell/backend.service  /etc/systemd/system/backend.ser
 dnf install mysql -y &>>$LOG_FILE
 validate $? "mysql client.....! installation"
 
-ysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e "show databases;"
+mysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e "show databases;"
 
 systemctl daemon-reload
 validate $? "reloading daemon"
