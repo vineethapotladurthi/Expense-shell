@@ -55,6 +55,26 @@ validate $? "creating app folder"
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
 validate $? "downloading backend application"
 
-cd /app&>>$LOG_FILE
+cd /app &>>$LOG_FILE
+rm -rf /app/* #removing existing version
 unzip /tmp/backend.zip
 validate $? "unzip backend code"
+
+npm install &>>$LOG_FILE
+validate $? "installing npm"
+cp /home/ec2-user/Expense-shell/backend.service  /etc/systemd/system/backend.service 
+
+dnf install mysql -y &>>$LOG_FILE
+validate $? "mysql client.....! installation"
+
+ysql -h mysql.vinusproject.online -u root -pExpenseApp@1 -e "show databases;"
+
+systemctl daemon-reload
+validate $? "reloading daemon"
+
+systemctl enable backend 2>&1 | tee -a $LOG_FILE
+validate $? "enblaing backend"
+
+systemctl restart backend 
+validate $? "restarting backend..!"
+
