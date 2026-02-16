@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-SOURCE_DIR='/home/ec2-user/logs'
+SOURCE_DIR=/home/ec2-user/logs
 if [ -d $SOURCE_DIR ]
 then
  echo " exists......"
@@ -15,4 +15,4 @@ while IFS=read -r line #internal feild separator empty it ignore white space -r 
 do
  echo " deleting line:$lne"
  #rm -rf $line
-done >>> $FILES
+done <<< $FILES
