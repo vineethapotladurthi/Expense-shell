@@ -14,5 +14,5 @@ echo "FILES:$FILES"
 while IFS=read -r line #internal feild separator empty it ignore white space -r ignores special characters like /
 do
  echo " deleting line:$lne"
- rm -rf $line
+ #rm -rf $line
 done >>> $FILES
