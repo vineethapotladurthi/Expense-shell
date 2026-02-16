@@ -9,10 +9,10 @@ then
   echo "doesnot exist..."
   exit 1
 fi
-FILES=$(find  $(SOURCE_DIR) -name "*.log" -mtime +14)
+FILES=$(find  $SOURCE_DIR -name "*.log" -mtime +14)
 echo "FILES:$FILES"
 while IFS=read -r line #internal feild separator empty it ignore white space -r ignores special characters like /
 do
- echo " deleting line:$lne"
+ echo " deleting line:$line"
  #rm -rf $line
 done <<< $FILES
